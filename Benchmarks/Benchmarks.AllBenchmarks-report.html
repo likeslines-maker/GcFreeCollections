@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8' />
+<title>Benchmarks.AllBenchmarks-20260214-164644</title>
+
+<style type="text/css">
+	table { border-collapse: collapse; display: block; width: 100%; overflow: auto; }
+	td, th { padding: 6px 13px; border: 1px solid #ddd; text-align: right; }
+	tr { background-color: #fff; border-top: 1px solid #ccc; }
+	tr:nth-child(even) { background: #f8f8f8; }
+</style>
+</head>
+<body>
+<pre><code>
+BenchmarkDotNet v0.15.8, Windows 11 (10.0.26200.7840/25H2/2025Update/HudsonValley2)
+11th Gen Intel Core i5-11400F 2.60GHz (Max: 2.59GHz), 1 CPU, 12 logical and 6 physical cores
+.NET SDK 10.0.102
+  [Host]     : .NET 8.0.24 (8.0.24, 8.0.2426.7010), X64 RyuJIT x86-64-v4
+  DefaultJob : .NET 8.0.24 (8.0.24, 8.0.2426.7010), X64 RyuJIT x86-64-v4
+</code></pre>
+<pre><code></code></pre>
+
+<table>
+<thead><tr><th>Method                                              </th><th>Categories</th><th>N</th><th>Mean   </th><th>Error </th><th>StdDev</th><th>Median </th><th>Min    </th><th>Max    </th><th>Gen0</th><th>Gen1</th><th>Gen2</th><th>Allocated</th>
+</tr>
+</thead><tbody><tr><td>&#39;StringBuilder:build string&#39;</td><td>String</td><td>1000</td><td>36.92 ns</td><td>0.760 ns</td><td>0.933 ns</td><td>36.99 ns</td><td>35.04 ns</td><td>38.84 ns</td><td>0.0650</td><td>-</td><td>-</td><td>408 B</td>
+</tr><tr><td>&#39;StringBuilder:build string&#39;</td><td>String</td><td>10000</td><td>38.18 ns</td><td>0.808 ns</td><td>1.937 ns</td><td>37.94 ns</td><td>34.42 ns</td><td>42.46 ns</td><td>0.0650</td><td>-</td><td>-</td><td>408 B</td>
+</tr><tr><td>&#39;PooledStringBuilder(ref):build string&#39;</td><td>String</td><td>10000</td><td>48.08 ns</td><td>0.994 ns</td><td>1.020 ns</td><td>48.04 ns</td><td>46.74 ns</td><td>50.55 ns</td><td>0.0127</td><td>-</td><td>-</td><td>80 B</td>
+</tr><tr><td>&#39;PooledStringBuilder(ref):build string&#39;</td><td>String</td><td>1000</td><td>49.33 ns</td><td>0.668 ns</td><td>0.592 ns</td><td>49.36 ns</td><td>48.44 ns</td><td>50.55 ns</td><td>0.0127</td><td>-</td><td>-</td><td>80 B</td>
+</tr><tr><td>&#39;PooledList&lt;int&gt;:Add + foreach sum&#39;</td><td>List</td><td>1000</td><td>1,502.93 ns</td><td>7.642 ns</td><td>6.774 ns</td><td>1,501.99 ns</td><td>1,494.55 ns</td><td>1,516.63 ns</td><td>0.0076</td><td>-</td><td>-</td><td>56 B</td>
+</tr><tr><td>&#39;List&lt;int&gt;:Add + foreach sum&#39;</td><td>List</td><td>1000</td><td>1,665.48 ns</td><td>18.635 ns</td><td>17.431 ns</td><td>1,667.93 ns</td><td>1,629.90 ns</td><td>1,688.90 ns</td><td>0.6447</td><td>0.0095</td><td>-</td><td>4056 B</td>
+</tr><tr><td>PooledQuery(fused):Where/Select/Take/ToPooledList</td><td>LINQ</td><td>1000</td><td>1,844.75 ns</td><td>22.074 ns</td><td>20.648 ns</td><td>1,838.82 ns</td><td>1,821.81 ns</td><td>1,886.62 ns</td><td>0.0172</td><td>-</td><td>-</td><td>112 B</td>
+</tr><tr><td>LINQ:Where/Select/Take/ToList</td><td>LINQ</td><td>1000</td><td>2,366.75 ns</td><td>34.743 ns</td><td>32.498 ns</td><td>2,359.82 ns</td><td>2,323.96 ns</td><td>2,425.47 ns</td><td>1.0338</td><td>0.0153</td><td>-</td><td>6496 B</td>
+</tr><tr><td>&#39;PooledSwissHashSet&lt;int&gt;:Add + Contains hits&#39;</td><td>HashSet</td><td>1000</td><td>6,377.21 ns</td><td>46.555 ns</td><td>43.548 ns</td><td>6,371.38 ns</td><td>6,312.30 ns</td><td>6,446.99 ns</td><td>0.0076</td><td>-</td><td>-</td><td>72 B</td>
+</tr><tr><td>&#39;List&lt;int&gt;:Add + Sort + sum&#39;</td><td>List</td><td>1000</td><td>6,392.11 ns</td><td>36.063 ns</td><td>28.155 ns</td><td>6,387.14 ns</td><td>6,359.92 ns</td><td>6,450.94 ns</td><td>0.6409</td><td>0.0076</td><td>-</td><td>4056 B</td>
+</tr><tr><td>&#39;PooledList&lt;int&gt;:Add + Sort + sum&#39;</td><td>List</td><td>1000</td><td>6,425.41 ns</td><td>52.272 ns</td><td>48.895 ns</td><td>6,418.14 ns</td><td>6,352.51 ns</td><td>6,517.81 ns</td><td>0.0076</td><td>-</td><td>-</td><td>56 B</td>
+</tr><tr><td>&#39;PooledHashSet&lt;int&gt;:Add + Contains hits&#39;</td><td>HashSet</td><td>1000</td><td>6,682.56 ns</td><td>24.899 ns</td><td>20.791 ns</td><td>6,681.49 ns</td><td>6,649.83 ns</td><td>6,730.18 ns</td><td>0.0076</td><td>-</td><td>-</td><td>64 B</td>
+</tr><tr><td>PooledQuery(fused):Where/Select/Take/ToPooledList</td><td>LINQ</td><td>10000</td><td>10,725.60 ns</td><td>65.931 ns</td><td>58.446 ns</td><td>10,714.77 ns</td><td>10,655.42 ns</td><td>10,857.07 ns</td><td>0.0153</td><td>-</td><td>-</td><td>112 B</td>
+</tr><tr><td>&#39;Dictionary&lt;string,int&gt;:iterate pairs sum&#39;</td><td>Dictionary</td><td>1000</td><td>11,444.73 ns</td><td>148.154 ns</td><td>131.335 ns</td><td>11,469.56 ns</td><td>11,217.03 ns</td><td>11,668.95 ns</td><td>4.9133</td><td>0.4883</td><td>-</td><td>31016 B</td>
+</tr><tr><td>&#39;HashSet&lt;int&gt;:Add + Contains hits&#39;</td><td>HashSet</td><td>1000</td><td>12,518.11 ns</td><td>197.846 ns</td><td>175.386 ns</td><td>12,482.87 ns</td><td>12,274.10 ns</td><td>12,830.36 ns</td><td>9.3384</td><td>1.5411</td><td>-</td><td>58664 B</td>
+</tr><tr><td>LINQ:Where/Select/Take/ToList</td><td>LINQ</td><td>10000</td><td>12,521.78 ns</td><td>103.915 ns</td><td>92.118 ns</td><td>12,513.62 ns</td><td>12,366.92 ns</td><td>12,720.78 ns</td><td>6.7444</td><td>0.8392</td><td>-</td><td>42496 B</td>
+</tr><tr><td>&#39;PooledDictionary&lt;string,int&gt;:iterate pairs sum&#39;</td><td>Dictionary</td><td>1000</td><td>12,726.84 ns</td><td>70.807 ns</td><td>66.233 ns</td><td>12,734.56 ns</td><td>12,620.47 ns</td><td>12,867.85 ns</td><td>-</td><td>-</td><td>-</td><td>88 B</td>
+</tr><tr><td>&#39;PooledList&lt;int&gt;:Add + foreach sum&#39;</td><td>List</td><td>10000</td><td>14,318.61 ns</td><td>95.397 ns</td><td>89.234 ns</td><td>14,308.85 ns</td><td>14,211.49 ns</td><td>14,515.68 ns</td><td>-</td><td>-</td><td>-</td><td>56 B</td>
+</tr><tr><td>&#39;List&lt;int&gt;:Add + foreach sum&#39;</td><td>List</td><td>10000</td><td>16,311.98 ns</td><td>123.667 ns</td><td>109.627 ns</td><td>16,319.19 ns</td><td>16,116.86 ns</td><td>16,542.23 ns</td><td>6.3477</td><td>0.7019</td><td>-</td><td>40056 B</td>
+</tr><tr><td>&#39;PooledSwissDictionary&lt;string,int&gt;:iterate pairs sum&#39;</td><td>Dictionary</td><td>1000</td><td>17,031.50 ns</td><td>91.864 ns</td><td>85.930 ns</td><td>17,038.98 ns</td><td>16,836.98 ns</td><td>17,160.09 ns</td><td>-</td><td>-</td><td>-</td><td>96 B</td>
+</tr><tr><td>&#39;Dictionary&lt;string,int&gt;:Add + TryGetValue hits&#39;</td><td>Dictionary</td><td>1000</td><td>21,292.64 ns</td><td>417.159 ns</td><td>496.598 ns</td><td>21,321.86 ns</td><td>20,239.28 ns</td><td>22,197.49 ns</td><td>4.9133</td><td>0.4883</td><td>-</td><td>31016 B</td>
+</tr><tr><td>&#39;PooledDictionary&lt;string,int&gt;:Add + TryGetValue hits&#39;</td><td>Dictionary</td><td>1000</td><td>25,406.97 ns</td><td>502.693 ns</td><td>736.842 ns</td><td>25,008.98 ns</td><td>24,706.34 ns</td><td>27,418.39 ns</td><td>-</td><td>-</td><td>-</td><td>88 B</td>
+</tr><tr><td>&#39;PooledSwissDictionary&lt;string,int&gt;:Add + TryGetValue hits&#39;</td><td>Dictionary</td><td>1000</td><td>26,903.09 ns</td><td>123.798 ns</td><td>115.801 ns</td><td>26,926.82 ns</td><td>26,730.45 ns</td><td>27,110.27 ns</td><td>-</td><td>-</td><td>-</td><td>96 B</td>
+</tr><tr><td>&#39;PooledSwissHashSet&lt;int&gt;:Add + Contains hits&#39;</td><td>HashSet</td><td>10000</td><td>55,426.60 ns</td><td>190.161 ns</td><td>168.573 ns</td><td>55,432.35 ns</td><td>55,151.99 ns</td><td>55,706.70 ns</td><td>-</td><td>-</td><td>-</td><td>72 B</td>
+</tr><tr><td>&#39;PooledHashSet&lt;int&gt;:Add + Contains hits&#39;</td><td>HashSet</td><td>10000</td><td>70,218.27 ns</td><td>1,094.735 ns</td><td>914.154 ns</td><td>70,213.64 ns</td><td>69,247.79 ns</td><td>72,483.76 ns</td><td>-</td><td>-</td><td>-</td><td>64 B</td>
+</tr><tr><td>&#39;List&lt;int&gt;:Add + Sort + sum&#39;</td><td>List</td><td>10000</td><td>82,846.77 ns</td><td>393.622 ns</td><td>368.194 ns</td><td>82,879.02 ns</td><td>82,194.49 ns</td><td>83,678.58 ns</td><td>6.3477</td><td>0.6104</td><td>-</td><td>40056 B</td>
+</tr><tr><td>&#39;PooledList&lt;int&gt;:Add + Sort + sum&#39;</td><td>List</td><td>10000</td><td>83,914.50 ns</td><td>888.610 ns</td><td>831.206 ns</td><td>83,858.52 ns</td><td>82,383.59 ns</td><td>85,608.51 ns</td><td>-</td><td>-</td><td>-</td><td>56 B</td>
+</tr><tr><td>&#39;PooledDictionary&lt;string,int&gt;:iterate pairs sum&#39;</td><td>Dictionary</td><td>10000</td><td>168,404.84 ns</td><td>1,023.462 ns</td><td>907.272 ns</td><td>168,213.38 ns</td><td>167,209.50 ns</td><td>170,379.30 ns</td><td>-</td><td>-</td><td>-</td><td>88 B</td>
+</tr><tr><td>&#39;HashSet&lt;int&gt;:Add + Contains hits&#39;</td><td>HashSet</td><td>10000</td><td>177,439.05 ns</td><td>1,863.383 ns</td><td>1,743.010 ns</td><td>177,400.93 ns</td><td>175,273.34 ns</td><td>181,091.50 ns</td><td>95.2148</td><td>95.2148</td><td>95.2148</td><td>538656 B</td>
+</tr><tr><td>&#39;Dictionary&lt;string,int&gt;:iterate pairs sum&#39;</td><td>Dictionary</td><td>10000</td><td>214,707.47 ns</td><td>1,023.112 ns</td><td>957.019 ns</td><td>214,513.99 ns</td><td>212,714.72 ns</td><td>216,685.13 ns</td><td>76.9043</td><td>76.9043</td><td>76.9043</td><td>283042 B</td>
+</tr><tr><td>&#39;PooledSwissDictionary&lt;string,int&gt;:iterate pairs sum&#39;</td><td>Dictionary</td><td>10000</td><td>229,427.15 ns</td><td>1,411.128 ns</td><td>1,319.970 ns</td><td>229,342.87 ns</td><td>227,656.01 ns</td><td>232,001.59 ns</td><td>-</td><td>-</td><td>-</td><td>96 B</td>
+</tr><tr><td>&#39;PooledDictionary&lt;string,int&gt;:Add + TryGetValue hits&#39;</td><td>Dictionary</td><td>10000</td><td>310,080.51 ns</td><td>1,184.919 ns</td><td>1,050.400 ns</td><td>309,969.63 ns</td><td>308,216.70 ns</td><td>311,642.43 ns</td><td>-</td><td>-</td><td>-</td><td>88 B</td>
+</tr><tr><td>&#39;Dictionary&lt;string,int&gt;:Add + TryGetValue hits&#39;</td><td>Dictionary</td><td>10000</td><td>348,706.07 ns</td><td>3,830.885 ns</td><td>3,583.412 ns</td><td>347,256.10 ns</td><td>344,103.17 ns</td><td>355,055.91 ns</td><td>76.6602</td><td>76.6602</td><td>76.6602</td><td>283042 B</td>
+</tr><tr><td>&#39;PooledSwissDictionary&lt;string,int&gt;:Add + TryGetValue hits&#39;</td><td>Dictionary</td><td>10000</td><td>371,681.37 ns</td><td>2,395.670 ns</td><td>2,240.911 ns</td><td>371,343.70 ns</td><td>368,720.90 ns</td><td>376,528.56 ns</td><td>-</td><td>-</td><td>-</td><td>96 B</td>
+</tr></tbody></table>
+</body>
+</html>
